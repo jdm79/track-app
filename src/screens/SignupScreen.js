@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from 'react-native';
 import { Text, Input, Button } from "react-native-elements";
-import Spacer from "../../components/Spacer";
+import Spacer from "../components/Spacer";
 
 // react-native-elements for the win!
 // Stuff that is ready to go out of the box
@@ -10,6 +10,10 @@ import Spacer from "../../components/Spacer";
 const SignupScreen = ({ navigation }) => {
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
+
+const signupHandler = () => {
+    console.log(email, password)
+}
     
     return (
         <View style={styles.container}>
@@ -34,7 +38,7 @@ const SignupScreen = ({ navigation }) => {
                 secureTextEntry
             />
             <Spacer>
-                <Button title="Sign up" />
+                <Button title="Sign up" onPress={signupHandler}/>
             </Spacer>
         </View>
     );
