@@ -1,8 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import { Text, Input, Button } from "react-native-elements";
+import { Text } from "react-native-elements";
 import Spacer from "../components/Spacer";
 import { Context as AuthContext } from "../context/AuthContext";
+import AuthForm from "../components/AuthForm";
 
 // react-native-elements for the win!
 // Stuff that is ready to go out of the box
@@ -10,35 +11,16 @@ import { Context as AuthContext } from "../context/AuthContext";
 
 const SignupScreen = ({ navigation }) => {
     const { state, signup } = useContext(AuthContext);
-    const [ email, setEmail ] = useState('');
-    const [ password, setPassword ] = useState('');
+    
     
     return (
         <View style={styles.container}>
-            <Spacer>
-                <Text h3>Sign up for Tracker</Text>
-            </Spacer>
-            {/* you could use onChangeText={setEmail} also */}
-            <Input 
-                label="Email" 
-                value={email} 
-                onChangeText={(newEmail) => setEmail(newEmail)}
-                autoCapitalize="none"
-                autoCorrect={false}
+            <AuthForm 
+                headerText="Sign up for Tracker"
+                errorMessage={state.errorMessage}
+                onSubmit={signup}
+                submitButtonText="Sign up"
             />
-            <Spacer />
-            <Input 
-                label="Password" 
-                value={password} 
-                onChangeText={(newPassword) => setPassword(newPassword)} 
-                autoCapitalize="none"    
-                autoCorrect={false}
-                secureTextEntry
-            />
-            {state.errorMessage ? <Text style={styles.errorMessage}>{state.errorMessage}</Text> : null}
-            <Spacer>
-                <Button title="Sign up" onPress={() => signup({ email, password })} />
-            </Spacer>
             <TouchableOpacity onPress={() => navigation.navigate('Signin')}>
                 <Spacer>
                      <Text style={styles.link}>Already have an account? Sign in here</Text>
@@ -59,12 +41,6 @@ const styles = StyleSheet.create({
         flex: 1, // this makes the container take up the whole screen
         justifyContent: 'center',
         // marginBottom: 250 // on Android this makes the sign up form jump up too high == not good
-    },
-    errorMessage: {
-        fontSize: 16,
-        color: 'red',
-        marginLeft: 15,
-        marginTop: 15
     },
     link: {
         color: 'blue',
