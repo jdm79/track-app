@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import { Text } from "react-native-elements";
-import Spacer from "../components/Spacer";
+import { StyleSheet, View, } from 'react-native';
 import { Context as AuthContext } from "../context/AuthContext";
 import AuthForm from "../components/AuthForm";
+import NavLink from "../components/NavLink";
 
 // react-native-elements for the win!
 // Stuff that is ready to go out of the box
@@ -21,11 +20,10 @@ const SignupScreen = ({ navigation }) => {
                 onSubmit={signup}
                 submitButtonText="Sign up"
             />
-            <TouchableOpacity onPress={() => navigation.navigate('Signin')}>
-                <Spacer>
-                     <Text style={styles.link}>Already have an account? Sign in here</Text>
-                </Spacer>
-            </TouchableOpacity>
+            <NavLink 
+                routeName="Signin"
+                text="Already have an account? Sign in here"
+            />
         </View>
     );
 };
@@ -42,10 +40,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         // marginBottom: 250 // on Android this makes the sign up form jump up too high == not good
     },
-    link: {
-        color: 'blue',
-        textAlign: 'center'
-    }
 });
 
 export default SignupScreen;
