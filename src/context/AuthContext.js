@@ -7,7 +7,7 @@ const authReducer = (state, action) => {
     switch (action.type) {
         case 'add_error':
             return { ...state, errorMessage: action.payload }
-        case 'sign_up':
+        case 'signin': // this works for sign in and sign out
             return { errorMessage: '', token: action.payload }
         default: 
             return state;
@@ -19,7 +19,7 @@ const signup = dispatch => async ({ email, password }) => {
         try  {
             const response = await trackerApi.post('/signup', { email, password });
             await AsyncStorage.setItem('token', response.data.token);
-            dispatch({ type: 'sign_up', payload: response.data.token })
+            dispatch({ type: 'signin', payload: response.data.token })
 
             // navigate to main flow
             navigate('TrackList');
@@ -33,11 +33,20 @@ const signup = dispatch => async ({ email, password }) => {
 }
 
 
-const signin = dispatch => ({ email, password }) => {
+const signin = dispatch => async ({ email, password }) => {
         // try to sign in
         // handle success by updating state
-        
-        // handle failure with error message
+        try  {
+            const response = await trackerApi.post('/signin', { email, password });
+            await AsyncStorage.setItem('token', response.data.token);
+            dispatch({ type: 'signin', payload: response.data.token })
+
+            // navigate to main flow
+            navigate('TrackList');
+        } catch (err) {
+            // handle failure with error message
+            dispatch({ type: 'add_error', payload: 'Something went wrong with sign in' })
+        }        
 }
 
 
