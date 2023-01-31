@@ -18,7 +18,7 @@ const stopRecording = dispatch => () => {
 };
 
 const addLocation = dispatch => (location) => {
-    dispatch({ type: 'add_current_location', payload: location } )
+    dispatch({ type: 'add_current_location', payload: location } );
 };
 
 export const { Context, Provider } = createDataContext(
