@@ -26,6 +26,7 @@ const tryLocalSignin = dispatch => async () => {
     const token = await AsyncStorage.getItem('token')
     if (token) {
         dispatch({ type: 'signin', payload: token });
+        console.log("User signed in locally - exists and smoothly slipped in")
         navigate('TrackList');
     } else {
         navigate('loginFlow');
