@@ -4,16 +4,17 @@ import TrackerApi from '../api/tracker';
 const trackReducer = (state, action) => {
     switch (action.type) {
         case 'fetch_tracks': 
-            return { ...state, currentLocation: action.payload };
-        case 'create_track': 
-            return { ...state, currentLocation: action.payload };
+            return action.payload;
+        // case 'create_track': 
+        //     return { ...state, currentLocation: action.payload };
         default:
             return state;
     }
 };
 
-const fetchTracks = dispatch => (name) => {
-    dispatch({ type: 'fetch_tracks', payload: name } );
+const fetchTracks = dispatch => async () => {
+    const response = await TrackerApi.get('/tracks');
+    dispatch({ type: 'fetch_tracks', payload: response. data })
 };
 const createTrack = dispatch => async (name, locations) => {
     await TrackerApi.post('/tracks', { name, locations });

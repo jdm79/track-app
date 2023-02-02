@@ -7,6 +7,7 @@ import Map from "../components/Map";
 import { Context as LocationContext } from "../context/LocationContext";
 import useLocation from "../hooks/useLocation";
 import TrackForm from "../components/TrackForm";
+import Spacer from "../components/Spacer";
 
 const TrackCreateScreen = ({ isFocused }) => {
     const { state: { recording }, addLocation } = useContext(LocationContext);
@@ -18,7 +19,11 @@ const TrackCreateScreen = ({ isFocused }) => {
 
     return (
         <SafeAreaView>
-            <Text h2>Create a track</Text>
+            {/* <Text h2>Create a track</Text> */}
+            <Spacer />
+            <Spacer />
+            <Spacer />
+            <Spacer />
             <Map />
             {err ? <Text>Please enable location services</Text> : null}
             <TrackForm />
