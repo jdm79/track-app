@@ -11,28 +11,26 @@ const TrackListScreen = ({ navigation }) => {
 
     return (
         <> 
-                <NavigationEvents onWillFocus={fetchTracks} />
-                {/* <Text style={{ fontSize: 48 }}>TrackListScreen</Text> */}
-                <FlatList
-                    data={state}
-                    keyExtractor={(item) => item._id}
-                    renderItem={({ item }) => {
-                    return (
-                        <TouchableOpacity>
-                        <ListItem>
-                            <ListItem.Content>
-                            <ListItem.Title>{item.name}</ListItem.Title>
-                            </ListItem.Content>
-                            <ListItem.Chevron />
-                        </ListItem>
-                        </TouchableOpacity>
-                    );
-                    }}
-                /> 
+            <NavigationEvents onWillFocus={fetchTracks} />
+            {/* <Text style={{ fontSize: 48 }}>TrackListScreen</Text> */}
+            <FlatList
+                data={state}
+                keyExtractor={(item) => item._id}
+                renderItem={({ item }) => {
+                return (
+                    <TouchableOpacity onPress={() => navigation.navigate('TrackDetail', { _id: item._id })} >
+                    <ListItem>
+                        <ListItem.Content>
+                        <ListItem.Title>{item.name}</ListItem.Title>
+                        </ListItem.Content>
+                        <ListItem.Chevron />
+                    </ListItem>
+                    </TouchableOpacity>
+                );
+                }}
+            /> 
         </>
-    )
-
-};
+)};
 
 const styles = StyleSheet.create({
 
