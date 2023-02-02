@@ -23,10 +23,11 @@ const clearErrorMessage = dispatch => () => {
 };
 
 const tryLocalSignin = dispatch => async () => {
-    const token = await AsyncStorage.getItem('token')
+    const token = await AsyncStorage.getItem('token');
     if (token) {
         dispatch({ type: 'signin', payload: token });
         console.log("User signed in locally - exists and smoothly slipped in")
+        // console.log(email)
         navigate('TrackList');
     } else {
         navigate('loginFlow');
@@ -49,6 +50,7 @@ const signup = dispatch => async ({ email, password }) => {
 const signin = dispatch => async ({ email, password }) => {
         try  {
             const response = await trackerApi.post('/signin', { email, password });
+            console.log(email)
             await AsyncStorage.setItem('token', response.data.token);
             dispatch({ type: 'signin', payload: response.data.token })
 
