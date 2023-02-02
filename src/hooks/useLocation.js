@@ -39,9 +39,9 @@ export default (shouldTrack, callback) => {
             startWatching();
         } else {
             // below causes error when navigating between screens
-            // if (subscriber) {
-            //     subscriber.remove();
-            // }
+            if (subscriber) {
+                subscriber.remove();
+            }
             subscriber = null;
         }
 
